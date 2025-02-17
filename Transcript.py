@@ -62,7 +62,7 @@ def analyze_with_deepseek(text, country):
 Country: {country}"""
     
     payload = {
-        "model": "deepseek-reasoner",
+        "model": "deepseek-chat",
         "messages": [
             {"role": "system", "content": system_prompt.format(country=country)},
             {"role": "user", "content": text[:15000]}
