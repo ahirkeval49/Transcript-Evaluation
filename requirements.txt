@@ -1,0 +1,8 @@
+streamlit
+pdfplumber
+python-docx
+pytesseract
+pillow
+pandas
+requests
+beautifulsoup4
