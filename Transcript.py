@@ -18,7 +18,7 @@ from functools import lru_cache
 # Configuration
 # --------------------------
 pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'  # Update for your OS
-DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
+DEEPSEEK_API_URL = "https://api.deepseek.com"
 COUNTRIES = ["India", "Pakistan", "Saudi Arabia", "Germany", "Nigeria", "Bangladesh"]
 
 # --------------------------
