@@ -51,14 +51,14 @@ def analyze_with_deepseek(text, country):
     }
     
     system_prompt = """Extract from transcript as JSON:
-{
+{{
   "institution_name": "Official name",
   "original_gpa": number,
   "gpa_scale": "Original scale",
   "degree_name": "Degree title",
-  "courses": [{"code": str, "name": str, "credits": number, "grade": str}],
+  "courses": [{{"code": str, "name": str, "credits": number, "grade": str}}],
   "us_degree_equivalent": "US equivalent"
-}
+}}
 Country: {country}"""
     
     payload = {
@@ -74,7 +74,14 @@ Country: {country}"""
     try:
         response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=30)
         response.raise_for_status()
-        return json.loads(response.json()['choices'][0]['message']['content'])
+        
+        # Validate response structure
+        response_json = response.json()
+        if 'choices' not in response_json or len(response_json['choices']) == 0:
+            st.error("Unexpected API response structure")
+            return None
+            
+        return json.loads(response_json['choices'][0]['message']['content'])
     except Exception as e:
         st.error(f"DeepSeek API Error: {str(e)}")
         return None
